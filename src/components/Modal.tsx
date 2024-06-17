@@ -7,10 +7,12 @@ import {
   useState,
 } from 'react';
 import ProjectForm from './forms/ProjectForm';
+import StoryForm from './forms/StoryForm';
+import TaskForm from './forms/TaskForm';
 
 export type ActionType = 'add' | 'edit';
 
-export type ModalComponentType = 'project';
+export type ModalComponentType = 'project' | 'story' | 'task';
 
 export type ModalProps = {
   component: ModalComponentType;
@@ -51,6 +53,20 @@ const getModalComponent = (
         case 'edit':
           return <ProjectForm handleClose={handleClose} id={itemId} />;
       }
+    case 'story':
+      switch (action) {
+        case 'add':
+          return <StoryForm handleClose={handleClose} />;
+        case 'edit':
+          return <StoryForm handleClose={handleClose} id={itemId} />;
+      }
+    case 'task':
+      switch (action) {
+        case 'add':
+          return <TaskForm handleClose={handleClose} />;
+        case 'edit':
+          return <TaskForm handleClose={handleClose} id={itemId} />;
+      }
   }
 };
 
@@ -64,7 +80,7 @@ const Modal = forwardRef(
 
     const Component = useCallback(
       () => getModalComponent(component, action, handleClose, itemId),
-      [component, action],
+      [component, action, itemId],
     );
 
     useImperativeHandle(ref, () => ({

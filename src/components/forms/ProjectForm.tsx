@@ -1,8 +1,7 @@
 import { TextField, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Project } from '../../types/project';
-
-import { useProjects } from '../../contexts/ProjectsContext';
+import { useProjects } from '../../hooks/useProjects';
 
 type ProjectFormValues = Pick<Project, 'name' | 'description'>;
 
@@ -18,7 +17,7 @@ const ProjectForm = ({ handleClose, id }: ProjectFormProps) => {
 
   useEffect(() => {
     if (isEditForm) {
-      const project = projects.find((project) => project.id === id);
+      const project = projects.find((project) => project._id === id);
 
       if (project) {
         setValues({
@@ -47,7 +46,7 @@ const ProjectForm = ({ handleClose, id }: ProjectFormProps) => {
     e.preventDefault();
 
     if (isEditForm) {
-      updateProject({ ...values, id });
+      updateProject({ ...values, _id: id });
     } else {
       addProject({ ...values });
     }

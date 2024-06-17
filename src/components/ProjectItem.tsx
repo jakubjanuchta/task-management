@@ -2,7 +2,7 @@ import { Box, Button, Card, CardContent, Typography } from '@mui/material';
 import { Project } from '../types/project';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useProjects } from '../contexts/ProjectsContext';
+import { useSelectedProject } from '../contexts/SelectedProjectContext';
 
 type ProjectItemProps = {
   project: Project;
@@ -16,7 +16,7 @@ const ProjectItem = ({
   handleRemove,
 }: ProjectItemProps) => {
   const { name, description } = project;
-  const { updateSelectedProject } = useProjects();
+  const { updateSelectedProject } = useSelectedProject();
 
   const handleSelectProject = () => {
     updateSelectedProject(project);

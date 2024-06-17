@@ -1,21 +1,23 @@
 import Modal, { ModalProps, ModalRef } from '../components/Modal';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import ProjectItem from '../components/ProjectItem';
-import { useProjects } from '../contexts/ProjectsContext';
+import { useProjects } from '../hooks/useProjects';
 
 const ProjectsList = () => {
-  const { projects, fetchProjects, deleteProject } = useProjects();
+  const { projects, loading, deleteProject } = useProjects();
+
+  console.log('fetched inside component', projects[0]);
+
+  useEffect(() => {
+    console.log('fetched inside useEffect', projects[0]);
+  }, [projects]);
 
   const modalRef = useRef<ModalRef>(null);
   const [modalOptions, setModalOptions] = useState<ModalProps>({
     component: 'project',
     action: 'add',
   });
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
 
   const openModalWithForm = (options: Omit<ModalProps, 'component'>) => {
     setModalOptions({
@@ -38,17 +40,18 @@ const ProjectsList = () => {
         Add project
       </Button>
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', width: '100%' }}>
+        {loading && <Typography>Loading...</Typography>}
         {projects.map((project) => (
           <ProjectItem
-            key={project.id}
+            key={project._id}
             project={project}
             handleEdit={() =>
               openModalWithForm({
                 action: 'edit',
-                itemId: project.id,
+                itemId: project._id,
               })
             }
-            handleRemove={() => deleteProject(project.id)}
+            handleRemove={() => deleteProject(project._id)}
           />
         ))}
       </Box>
