@@ -1,7 +1,8 @@
 export type Project = {
-  id: string;
+  _id: string;
   name: string;
   description: string;
+  owner: string;
 };
 
 export type SelectedProject = Project;

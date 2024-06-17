@@ -1,0 +1,9 @@
+{
+    "appId": "application-0-hppezzs",
+    "appUrl": "https://services.cloud.mongodb.com/groups/66622c2a18ca473034ac5a5e/apps/66622f256ede39d890a53d1a",
+    "baseUrl": "https://services.cloud.mongodb.com",
+    "clientApiBaseUrl": "https://eu-central-1.aws.services.cloud.mongodb.com",
+    "dataApiBaseUrl": "https://eu-central-1.aws.data.mongodb-api.com",
+    "dataExplorerLink": "https://cloud.mongodb.com/links/66622c2a18ca473034ac5a5e/explorer/Task-management/database/collection/find",
+    "dataSourceName": "mongodb-atlas"
+}

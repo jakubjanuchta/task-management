@@ -25,8 +25,8 @@ export const getItems = (itemType: ItemType) => {
   return items ? JSON.parse(items) : [];
 };
 
-export const getSingleItem = (itemType: ItemType, itemId: Item['id']) =>
-  getItems(itemType).find((i: Item) => i.id === itemId);
+export const getSingleItem = (itemType: ItemType, itemId: Item['_id']) =>
+  getItems(itemType).find((i: Item) => i._id === itemId);
 
 export const createItem = (itemType: ItemType, item: Item) => {
   const items = getItems(itemType);
@@ -34,8 +34,8 @@ export const createItem = (itemType: ItemType, item: Item) => {
   setItems(itemType, [...items, item]);
 };
 
-export const removeItem = (itemType: ItemType, itemId: Item['id']) => {
-  const items = getItems(itemType).filter((i: Item) => i.id !== itemId);
+export const removeItem = (itemType: ItemType, itemId: Item['_id']) => {
+  const items = getItems(itemType).filter((i: Item) => i._id !== itemId);
 
   setItems(itemType, [...items]);
 };
@@ -43,7 +43,7 @@ export const removeItem = (itemType: ItemType, itemId: Item['id']) => {
 export const updateItem = (itemType: ItemType, item: Item) => {
   const items = getItems(itemType);
 
-  const updatedItems = items.map((i: Item) => (i.id === item.id ? item : i));
+  const updatedItems = items.map((i: Item) => (i._id === item._id ? {...i, ...item} : i));
 
   setItems(itemType, updatedItems);
 };
