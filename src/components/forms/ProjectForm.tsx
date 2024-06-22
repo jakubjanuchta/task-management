@@ -2,6 +2,7 @@ import { TextField, Button, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Project } from '../../types/project';
 import { useProjects } from '../../hooks/useProjects';
+import notificationService from '../../services/NotificationService';
 
 type ProjectFormValues = Pick<Project, 'name' | 'description'>;
 
@@ -49,6 +50,15 @@ const ProjectForm = ({ handleClose, id }: ProjectFormProps) => {
       updateProject({ ...values, _id: id });
     } else {
       addProject({ ...values });
+
+      const newNotification = {
+        title: 'New project added!',
+        message: `A new project called ${values.name} has been added.`,
+        date: new Date().toISOString(),
+        priority: 'medium' as const,
+        read: false,
+      };
+      notificationService.send(newNotification);
     }
 
     handleClose();

@@ -20,6 +20,9 @@ import StoryScreen from './screens/StoryScreen';
 import { useMemo, useState } from 'react';
 import DarkModeSwitch from './components/DarkModeSwitch';
 import ErrorScreen from './screens/ErrorScreen';
+import NewNotification from './components/notification/NewNotification';
+import NotificationCounter from './components/notification/NotificationCounter';
+import NotificationList from './components/notification/NotificationList';
 
 const menuElementStyle = {
   width: '100px',
@@ -35,8 +38,6 @@ const App = () => {
 
   const { selectedProject, clearSelectedProject } = useSelectedProject();
   const navigate = useNavigate();
-
-  const app = useApp();
 
   const { authData, logout } = useAuth();
 
@@ -122,7 +123,10 @@ const App = () => {
               </Button>
             </Box>
           )}
-          <Box style={{ display: 'flex', gap: 10 }}>
+
+          <Box style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+            <NotificationCounter />
+
             <DarkModeSwitch
               mode={mode}
               toggleMode={() =>
@@ -142,6 +146,7 @@ const App = () => {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/projects" element={<ProjectsScreen />} />
             <Route path="projects/story/:id" element={<StoryScreen />} />
+            <Route path="/notifications" element={<NotificationList />} />
           </Routes>
         </AuthWall>
         <Routes>

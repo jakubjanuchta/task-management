@@ -5,7 +5,6 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
-  Box,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 
@@ -14,6 +13,7 @@ import { STORIES_PRIORITIES } from '../../constants/constants';
 import { Task } from '../../types/task';
 import { useParams } from 'react-router-dom';
 import { useTasks } from '../../hooks/useTasks';
+import notificationService from '../../services/NotificationService';
 
 type TaskFormValues = Pick<
   Task,
@@ -92,6 +92,16 @@ const TaskForm = ({ handleClose, id }: TaskFormProps) => {
       updateTask({ ...values, _id: id });
     } else {
       addTask({ ...values });
+
+      const newNotification = {
+        title: 'New task added!',
+        message: `A new task called ${values.name} has been added.`,
+        date: new Date().toISOString(),
+        priority: values.priority,
+        read: false,
+      };
+
+      notificationService.send(newNotification);
     }
 
     handleClose();

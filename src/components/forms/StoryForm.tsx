@@ -10,9 +10,9 @@ import { useEffect, useState } from 'react';
 
 import { Story } from '../../types/story';
 import { STORIES_PRIORITIES, STORIES_STATES } from '../../constants/constants';
-import { useAuth } from '../../contexts/AuthContext';
 import { useSelectedProject } from '../../contexts/SelectedProjectContext';
 import { useStories } from '../../hooks/useStories';
+import notificationService from '../../services/NotificationService';
 
 type StoryFormValues = Pick<
   Story,
@@ -77,6 +77,15 @@ const StoryForm = ({ handleClose, id }: StoryFormProps) => {
       updateStory({ ...values, _id: id });
     } else {
       addStory({ ...values });
+
+      const newNotification = {
+        title: 'New story added!',
+        message: `A new story called ${values.name} has been added.`,
+        date: new Date().toISOString(),
+        priority: values.priority,
+        read: false,
+      };
+      notificationService.send(newNotification);
     }
 
     handleClose();

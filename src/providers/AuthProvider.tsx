@@ -18,7 +18,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const { addUser } = useUsers();
 
   useEffect(() => {
-    const credential = localStorage.getItem('user');
+    const credential = sessionStorage.getItem('user');
 
     if (credential) {
       setAuthData({ user: jwtDecode(JSON.parse(credential)) });
@@ -29,7 +29,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const login = (credential: string) => {
     if (credential) {
-      localStorage.setItem('user', JSON.stringify(credential));
+      sessionStorage.setItem('user', JSON.stringify(credential));
 
       const user = jwtDecode(credential) as User;
 
