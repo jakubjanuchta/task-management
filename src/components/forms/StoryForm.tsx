@@ -34,7 +34,6 @@ const StoryForm = ({ handleClose, id }: StoryFormProps) => {
 
   useEffect(() => {
     if (isEditForm) {
-      console.log('id', stories, id);
       const story = stories.find((story) => story._id === id);
 
       if (story) {

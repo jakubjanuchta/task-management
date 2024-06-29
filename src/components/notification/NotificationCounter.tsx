@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import notificationService from '../../services/NotificationService';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -6,11 +6,11 @@ import { Badge, Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   badge: {
     right: -3,
     top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
+    border: `2px solid white`,
     padding: '0 4px',
   },
 }));

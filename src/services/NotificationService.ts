@@ -1,21 +1,21 @@
 import { BehaviorSubject, Subject } from 'rxjs';
 
-type ISOString = string
+type ISOString = string;
 
 export type Notification = {
-    title: string,
-    message: string,
-    date: ISOString,
-    priority: 'low'|'medium'|'high',
-    read: boolean
-    };
+  title: string;
+  message: string;
+  date: ISOString;
+  priority: 'low' | 'medium' | 'high';
+  read: boolean;
+};
 
 const initialNotifications: Notification[] = [];
 
 class NotificationService {
   notificationsSubject = new BehaviorSubject(initialNotifications);
   unreadCountSubject = new BehaviorSubject(0);
-  highPrioritySubject = new Subject();
+  highPrioritySubject = new Subject<Notification>();
 
   send(notification: Notification) {
     const currentNotifications = this.notificationsSubject.getValue();
@@ -25,7 +25,10 @@ class NotificationService {
       this.unreadCountSubject.next(this.unreadCountSubject.getValue() + 1);
     }
 
-    if (notification.priority === 'medium' || notification.priority === 'high') {
+    if (
+      notification.priority === 'medium' ||
+      notification.priority === 'high'
+    ) {
       this.highPrioritySubject.next(notification);
     }
   }
@@ -43,12 +46,12 @@ class NotificationService {
   }
 
   markAsRead(notification: Notification) {
-    const updatedNotifications = this.notificationsSubject.getValue().map(n =>
-      n === notification ? { ...n, read: true } : n
-    );
+    const updatedNotifications = this.notificationsSubject
+      .getValue()
+      .map((n) => (n === notification ? { ...n, read: true } : n));
     this.notificationsSubject.next(updatedNotifications);
     this.unreadCountSubject.next(
-      this.unreadCountSubject.getValue() - (notification.read ? 0 : 1)
+      this.unreadCountSubject.getValue() - (notification.read ? 0 : 1),
     );
   }
 }

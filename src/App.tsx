@@ -23,6 +23,7 @@ import ErrorScreen from './screens/ErrorScreen';
 import NewNotification from './components/notification/NewNotification';
 import NotificationCounter from './components/notification/NotificationCounter';
 import NotificationList from './components/notification/NotificationList';
+import HighPriorityNotifications from './components/notification/HighPriorityNotifications';
 
 const menuElementStyle = {
   width: '100px',
@@ -140,6 +141,8 @@ const App = () => {
             )}
           </Box>
         </Box>
+
+        <HighPriorityNotifications />
 
         <AuthWall>
           <Routes>

@@ -16,7 +16,6 @@ export function useCollection({
   const app = useApp();
 
   return React.useMemo(() => {
-    console.log('app.currentUser', app.currentUser);
     const mdb = app?.currentUser?.mongoClient(cluster);
     return mdb?.db(db).collection(collection);
   }, [app.currentUser, cluster, db, collection]);

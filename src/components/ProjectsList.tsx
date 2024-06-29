@@ -1,17 +1,11 @@
 import Modal, { ModalProps, ModalRef } from '../components/Modal';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import ProjectItem from '../components/ProjectItem';
 import { useProjects } from '../hooks/useProjects';
 
 const ProjectsList = () => {
   const { projects, loading, deleteProject } = useProjects();
-
-  console.log('fetched inside component', projects[0]);
-
-  useEffect(() => {
-    console.log('fetched inside useEffect', projects[0]);
-  }, [projects]);
 
   const modalRef = useRef<ModalRef>(null);
   const [modalOptions, setModalOptions] = useState<ModalProps>({

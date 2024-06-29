@@ -13,7 +13,7 @@ const LoginScreen = () => {
           credentialResponse.credential && login(credentialResponse.credential);
         }}
         onError={() => {
-          console.log('Login Failed');
+          alert('Login Failed');
         }}
       />
     </Container>

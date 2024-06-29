@@ -54,8 +54,6 @@ const Board = ({ items, type }: BoardProps) => {
   const classes = useStyles();
   const { id: storyId } = useParams();
 
-  console.log('items', items);
-
   const { selectedProject } = useSelectedProject();
   const { deleteStory } = useStories({ projectId: selectedProject?._id });
   const { deleteTask } = useTasks({ storyId: storyId });

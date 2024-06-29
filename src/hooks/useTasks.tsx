@@ -30,7 +30,6 @@ export function useTasks({ storyId }: { storyId?: string }) {
     });
 
     fetchTasks?.then((tasks) => {
-      console.log('tasks in fetch', tasks);
       setTasks(tasks);
       setLoading(false);
     });
